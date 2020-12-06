@@ -1,3 +1,4 @@
+
 package acme.features.supplier.items;
 
 import java.util.Collection;
@@ -5,6 +6,7 @@ import java.util.Collection;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import acme.entities.coupons.Coupon;
 import acme.entities.customisations.Customisation;
 import acme.entities.items.Item;
 import acme.entities.requests.RequestEntity;
@@ -14,7 +16,7 @@ import acme.entities.specificationSheets.SpecificationSheet;
 import acme.framework.repositories.AbstractRepository;
 
 @Repository
-public interface SupplierItemRepository extends AbstractRepository{
+public interface SupplierItemRepository extends AbstractRepository {
 
 	@Query("select i from Item i where i.supplier.id=?1")
 	Collection<Item> findManyBySupplierId(int supplierId);
@@ -45,4 +47,7 @@ public interface SupplierItemRepository extends AbstractRepository{
 
 	@Query("select i from Item i")
 	Collection<Item> findMany();
+
+	@Query("select i.coupon from Item i where i.id=?1")
+	Coupon findCouponByItemId(int id);
 }

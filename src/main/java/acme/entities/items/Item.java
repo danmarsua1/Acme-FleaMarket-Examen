@@ -20,6 +20,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.URL;
 
+import acme.entities.coupons.Coupon;
 import acme.entities.requests.RequestEntity;
 import acme.entities.roles.Supplier;
 import acme.entities.specificationSheets.SpecificationSheet;
@@ -69,7 +70,6 @@ public class Item extends DomainEntity {
 	@Pattern(regexp = "^(DRAFT|PUBLISHED)$")
 	private String						status;
 
-
 	// Derived attributes -----------------------------------------------------
 
 	private boolean						newItem;
@@ -78,8 +78,7 @@ public class Item extends DomainEntity {
 
 	@Valid
 	@OneToOne(optional = false, cascade = CascadeType.ALL)
-	private SpecificationSheet	specificationSheet;
-
+	private SpecificationSheet			specificationSheet;
 
 	@NotNull
 	@Valid
@@ -94,5 +93,8 @@ public class Item extends DomainEntity {
 	@Valid
 	@OneToMany(mappedBy = "item")
 	private Collection<RequestEntity>	requests;
+
+	@OneToOne(optional = true)
+	private Coupon						coupon;
 
 }

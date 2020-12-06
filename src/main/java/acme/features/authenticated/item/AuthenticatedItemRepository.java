@@ -12,7 +12,7 @@ import acme.framework.repositories.AbstractRepository;
 @Repository
 public interface AuthenticatedItemRepository extends AbstractRepository {
 
-	@Query("Select i from Item i")
+	@Query("select i from Item i where i.finalMode=true")
 	Collection<Item> findMany();
 
 	@Query("select i from Item i where i.id =?1")

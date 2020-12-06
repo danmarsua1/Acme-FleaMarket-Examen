@@ -6,6 +6,10 @@ supplier.item.form.label.description = Description
 supplier.item.form.label.itemCategory = Item Category
 supplier.item.form.label.price= Price
 supplier.item.form.label.link= Link with Info Additional
+supplier.item.form.label.status = Status
+supplier.item.form.label.finalMode= Final Mode
+supplier.item.form.label.finalMode.final= Final
+supplier.item.form.label.finalMode.draft= Draft
 
 supplier.item.form.label.sectionTitle= SpecificationSheet
 supplier.item.form.label.newItem=New Item
@@ -18,6 +22,9 @@ supplier.item.list.label.newItem = New Item
 supplier.item.form.button.update = Update
 supplier.item.form.button.create = Create
 supplier.item.form.button.delete = Delete
+
+supplier.item.form.button.createCoupon = Add coupon
+
 supplier.item.form.button.return=Return 
 
 supplier.item.form.error.tickerIncorrecto= Invalid ticker

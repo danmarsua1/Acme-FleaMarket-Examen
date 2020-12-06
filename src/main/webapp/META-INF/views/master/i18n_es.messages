@@ -81,9 +81,10 @@ master.menu.administrator.chart = Gráfico
 
 master.menu.auditor ########################################################
 master.menu.auditor =Auditor
-master.menu.auditor.list-audit-record = Lista de mis Registros de Auditoría
-master.menu.auditor.list-not-mine-audit-record = Lista de otros Registros de Auditoría
+master.menu.auditor.list-audit-record = Lista de Registros de Auditoría
 master.menu.auditor.list-item = Lista de Productos
+master.menu.auditor.list-my-item = Lista de mis Registros de Auditoría
+master.menu.auditor.list-not-mine-audit-record= Lista de otros Registros de Auditoría
 
 
 master.menu.supplier ########################################################

@@ -9,8 +9,10 @@ import java.util.GregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.coupons.Coupon;
 import acme.entities.items.Item;
 import acme.features.authenticated.message.AuthenticatedMessageRepository;
+import acme.features.supplier.items.SupplierItemRepository;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Authenticated;
@@ -24,6 +26,9 @@ public class AuthenticatedItemShowService implements AbstractShowService<Authent
 
 	@Autowired
 	AuthenticatedMessageRepository	messageRepository;
+
+	@Autowired
+	SupplierItemRepository			couponRepository;
 
 
 	@Override
@@ -60,7 +65,7 @@ public class AuthenticatedItemShowService implements AbstractShowService<Authent
 			entity.setNewItem(true);
 		}
 
-		request.unbind(entity, model, "ticker", "creationMoment", "title", "itemCategory", "description", "price", "photo", "link", "newItem");
+		request.unbind(entity, model, "ticker", "creationMoment", "title", "itemCategory", "description", "price", "photo", "link", "newItem", "coupon.description", "coupon.minMoney", "coupon.maxMoney", "coupon.code");
 		model.setAttribute("item", entity.getId());
 
 		Integer forum = this.messageRepository.findForumByItemId(entity.getId()).getId();
@@ -68,6 +73,14 @@ public class AuthenticatedItemShowService implements AbstractShowService<Authent
 		request.setModel(model);
 
 		model.setAttribute("isFinalMode", entity.isFinalMode());
+
+		Coupon coupon = this.couponRepository.findCouponByItemId(entity.getId());
+		if (coupon != null) {
+			model.setAttribute("hasCoupon", true);
+
+		} else {
+			model.setAttribute("hasCoupon", false);
+		}
 
 	}
 

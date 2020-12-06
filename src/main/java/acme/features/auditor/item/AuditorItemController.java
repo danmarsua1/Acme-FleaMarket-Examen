@@ -1,3 +1,4 @@
+
 package acme.features.auditor.item;
 
 import javax.annotation.PostConstruct;
@@ -14,20 +15,21 @@ import acme.framework.controllers.AbstractController;
 
 @Controller
 @RequestMapping("/auditor/item/")
-public class AuditorItemController  extends AbstractController<Auditor, Item>{
-
+public class AuditorItemController extends AbstractController<Auditor, Item> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AuditorItemListMineService	listMineService;
-	
+	private AuditorItemListMineService		listMineService;
+
 	@Autowired
 	private AuditorItemListNotMineService	listNotMineService;
 
 	@Autowired
-	private AuditorItemShowService	showService;
+	private AuditorItemShowService			showService;
 
+	@Autowired
+	private AuditorItemListService			listService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -37,6 +39,6 @@ public class AuditorItemController  extends AbstractController<Auditor, Item>{
 		super.addCustomCommand(CustomCommand.LIST_MINE, BasicCommand.LIST, this.listMineService);
 		super.addCustomCommand(CustomCommand.LIST_NOT_MINE, BasicCommand.LIST, this.listNotMineService);
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
-	
+		super.addBasicCommand(BasicCommand.LIST, this.listService);
 	}
 }

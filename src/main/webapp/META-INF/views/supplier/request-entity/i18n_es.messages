@@ -17,3 +17,5 @@ supplier.item.list.label.title=Título
 
 supplier.request.form.button.update = Actualizar
 supplier.item.form.button.return=Atrás 
+
+supplier.request.form.error.rejectionJustification = Este campo es obligatorio 

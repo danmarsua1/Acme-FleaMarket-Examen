@@ -20,8 +20,7 @@
 </jstl:if>
 <jstl:if test="${command=='create' }">
 	<acme:form-textbox code="auditor.audit-record.form.label.title" path="title"/>
-	<acme:form-textbox code="auditor.audit-record.form.label.body" path="body"/>
-	<acme:form-textbox code="auditor.audit-record.form.label.status" path="status"/>	
+	<acme:form-textbox code="auditor.audit-record.form.label.body" path="body"/>	
 	<acme:form-submit  test="${command == 'create' }"  code="auditor.audit-record.form.button.create" action="/auditor/audit-record/create?item=${item}"/>
 </jstl:if>	
 	 

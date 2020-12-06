@@ -1,6 +1,7 @@
 buyer.request.form.label.ticker = Ticker
 buyer.request.form.label.creation = Creation moment
 buyer.request.form.label.quantity = Quantity
+buyer.request.form.label.totalPrice = Total price
 buyer.request.form.label.notes = Notes
 buyer.request.form.label.item.title = Item
 

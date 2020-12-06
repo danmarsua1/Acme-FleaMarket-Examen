@@ -17,6 +17,7 @@ import javax.validation.constraints.Pattern;
 
 import acme.entities.items.Item;
 import acme.entities.roles.Buyer;
+import acme.framework.datatypes.Money;
 import acme.framework.entities.DomainEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,12 +46,13 @@ public class RequestEntity extends DomainEntity {
 	private String				notes;
 
 	// Derived attributes -----------------------------------------------------
-	
+
 	@NotNull
 	private RequestEntityStatus	status;					// PENDIENTE, ACEPTADO O RECHAZADO
 
 	private String				rejectionJustification;			// OBLIGATORIO AL RECHAZAR
-	
+
+	private Money				totalPrice;
 
 	// Relationships ----------------------------------------------------------
 

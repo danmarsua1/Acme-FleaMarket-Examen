@@ -100,7 +100,8 @@ master.menu.sponsor.create-banner = Create banner
 master.menu.auditor ########################################################
 master.menu.auditor =Auditor
 master.menu.auditor.list-audit-record = List of Audit Record
-master.menu.auditor.list-item = List of My Items
+master.menu.auditor.list-item = List of Items
+master.menu.auditor.list-my-item = List of My Items
 master.menu.auditor.list-not-mine-audit-record=List of Others Items
 
 # master.menu.user-account ####################################################

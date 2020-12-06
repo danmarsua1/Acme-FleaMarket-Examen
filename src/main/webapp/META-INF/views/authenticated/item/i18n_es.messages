@@ -18,3 +18,9 @@ authenticated.audit-record.form.button.list = Listar registro de auditorías
 authenticated.item.form.button.viewMessages = Ver foro
 authenticated.item.form.button.newMessage = Nuevo mensaje de foro
 authenticated.item.form.button.orderItem = Pedir producto
+
+supplier.coupon.form.legend.coupon = Cupón de descuento
+supplier.coupon.form.label.code = Código
+supplier.coupon.form.label.description = Descripción
+supplier.coupon.form.label.minMoney = Dinero mínimo
+supplier.coupon.form.label.maxMoney = Dinero máximo

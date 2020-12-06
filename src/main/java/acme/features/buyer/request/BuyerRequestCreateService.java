@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.coupons.Coupon;
 import acme.entities.items.Item;
 import acme.entities.requests.RequestEntity;
 import acme.entities.requests.RequestEntityStatus;
@@ -17,6 +18,7 @@ import acme.features.authenticated.item.AuthenticatedItemRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.datatypes.Money;
 import acme.framework.entities.Principal;
 import acme.framework.services.AbstractCreateService;
 
@@ -115,6 +117,40 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 
 		System.out.println(entity.getItem().getTitle());
 		System.out.println(entity.getBuyer().getEmail());
+
+		Double quantity = entity.getQuantity();
+		Double price = entity.getItem().getPrice().getAmount();
+
+		Double total = quantity * price;
+
+		Coupon coupon = entity.getItem().getCoupon();
+
+		Money money = new Money();
+
+		if (coupon != null) {
+
+			Money minMoney = coupon.getMinMoney();
+			Money maxMoney = coupon.getMaxMoney();
+
+			//Condición para aplicar el descuento
+			if (quantity == 1) {
+				money.setCurrency("€");
+				money.setAmount(total);
+			} else if (quantity == 2 || quantity == 3) {
+				Double discount = minMoney.getAmount();
+				total = total - discount;
+				money.setCurrency("€");
+				money.setAmount(total);
+			} else if (quantity > 3) {
+				Double discount = maxMoney.getAmount();
+				total = total - discount;
+				money.setCurrency("€");
+				money.setAmount(total);
+			}
+
+		}
+
+		entity.setTotalPrice(money);
 
 		this.repository.save(entity);
 	}

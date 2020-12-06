@@ -13,6 +13,9 @@ supplier.request.form.label.status.rejected = Rejected
 
 supplier.request.list.label.creation=Creation moment
 supplier.request.list.label.ticker=Ticker
+
 supplier.request.form.button.update = Update
 supplier.request.form.button.return=Return 
+
+supplier.request.form.error.rejectionJustification = This field is required
 
