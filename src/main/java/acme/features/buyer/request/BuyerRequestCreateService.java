@@ -17,6 +17,7 @@ import acme.features.authenticated.item.AuthenticatedItemRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.datatypes.Money;
 import acme.framework.entities.Principal;
 import acme.framework.services.AbstractCreateService;
 
@@ -34,7 +35,7 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 	@Override
 	public boolean authorise(final Request<RequestEntity> request) {
 		assert request != null;
-		System.out.println("AUTHORISE");
+	
 
 		return true;
 	}
@@ -44,7 +45,6 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		System.out.println("BIND");
 
 		request.bind(entity, errors, "item");
 
@@ -56,7 +56,6 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		System.out.println("UNBIND");
 
 		request.unbind(entity, model, "ticker", "quantity", "notes");
 
@@ -101,20 +100,29 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		System.out.println("VALIDATE");
+
 	}
 
 	@Override
 	public void create(final Request<RequestEntity> request, final RequestEntity entity) {
 		assert request != null;
 		assert entity != null;
-		System.out.println("CREATE");
 
 		Date moment = new Date(System.currentTimeMillis() - 1);
 		entity.setCreation(moment);
 
-		System.out.println(entity.getItem().getTitle());
-		System.out.println(entity.getBuyer().getEmail());
+		Double quantity = entity.getQuantity();
+		Double price = entity.getItem().getPrice().getAmount();
+
+		Double total = quantity * price;
+
+		Money money = new Money();
+		
+		money.setAmount(total);
+		money.setCurrency("€");
+
+		entity.setTotalPrice(money);
+		
 
 		this.repository.save(entity);
 	}

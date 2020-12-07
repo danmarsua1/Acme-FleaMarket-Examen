@@ -6,6 +6,8 @@ import java.util.Collection;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import acme.entities.coupons.Coupon;
+import acme.entities.letters.Letter;
 import acme.entities.requests.RequestEntity;
 import acme.entities.roles.Buyer;
 import acme.framework.repositories.AbstractRepository;
@@ -24,4 +26,10 @@ public interface BuyerRequestRepository extends AbstractRepository {
 
 	@Query("select b from Buyer b where b.id =?1")
 	Buyer findBuyerById(int activeRoleId);
+
+	@Query("select i.letter from RequestEntity i where i.id=?1")
+	Letter findLetterByReqId(int id);
+
+	@Query("select i.item.coupon from RequestEntity i where i.id=?1")
+	Coupon findCouponByItemId(int id);
 }

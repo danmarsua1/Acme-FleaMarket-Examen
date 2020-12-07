@@ -1,0 +1,22 @@
+supplier.coupon.form.label.code = Código
+supplier.coupon.form.label.description = Descripción
+supplier.coupon.form.label.minMoney = Dinero mínimo
+supplier.coupon.form.label.maxMoney = Dinero máximo
+supplier.coupon.form.label.percentDiscount = Descuento
+
+supplier.coupon.form.button.update = Actualizar
+supplier.coupon.form.button.create = Crear
+supplier.coupon.form.button.delete = Borrar
+
+supplier.coupon.form.button.createCoupon = Añadir cupón
+supplier.coupon.form.button.deleteCoupon = Borrar cupón
+supplier.coupon.form.legend.coupon = Cupón de descuento
+
+supplier.coupon.form.button.return=Atrás 
+
+supplier.coupon.form.error.tickerIncorrecto= Ticket incorrecto
+supplier.coupon.form.error.tickerRepetido= Ticket repetido
+supplier.coupon.form.error.minMoney = La moneda no es correcta, solo aceptamos euros
+supplier.coupon.form.error.maxMoney = La moneda no es correcta, solo aceptamos euros
+supplier.coupon.form.error.minMoneyLower = El dinero mínimo tiene que ser menor al dinero máximo
+supplier.coupon.form.error.maxGreaterThanPrice = El dinero máximo tiene que ser menor que el precio del producto

@@ -1,3 +1,4 @@
+
 package acme.features.administrator.dashboard;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import acme.framework.entities.Administrator;
 import acme.framework.services.AbstractShowService;
 
 @Service
-public class AdministratorDashboardShow implements AbstractShowService<Administrator, Dashboard>{
+public class AdministratorDashboardShow implements AbstractShowService<Administrator, Dashboard> {
 
 	@Autowired
 	AdministratorDashboardRepository repository;
@@ -33,16 +34,13 @@ public class AdministratorDashboardShow implements AbstractShowService<Administr
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "numberNews", "numberMaterialSheets", "numberToolSheets", 
-				"numberSuggestions", "numberFigments", "minDiscountAdvertisements", 
-				"maxDiscountAdvertisements", "averageSmallDiscountAdvertisements", "averageAverageDiscountAdvertisements",
-				"averageLargeDiscountAdvertisements","stddevSDiscountAdvertisements", "stddevADiscountAdvertisements",
-				"stddevLDiscountAdvertisements", "averageItemsPerSupplier", "averageRequestsPerSupplier", "averageRequestsPerBuyer");
+		request.unbind(entity, model, "numberNews", "numberMaterialSheets", "numberToolSheets", "numberSuggestions", "numberFigments", "minDiscountAdvertisements", "numberAdvertisement", "minDiscount", "maxDiscount", "maxDiscountAdvertisements",
+			"averageSmallDiscountAdvertisements", "averageAverageDiscountAdvertisements", "averageLargeDiscountAdvertisements", "stddevSDiscountAdvertisements", "stddevADiscountAdvertisements", "stddevLDiscountAdvertisements", "averageItemsPerSupplier",
+			"averageRequestsPerSupplier", "averageRequestsPerBuyer", "ratioOfItemsGrouped", "ratioOfRequestsHaveALink", "ratioOfRequestsHavePassword");
 	}
 
-
 	@Override
-	public Dashboard findOne(Request<Dashboard> request) {
+	public Dashboard findOne(final Request<Dashboard> request) {
 
 		assert request != null;
 
@@ -58,9 +56,24 @@ public class AdministratorDashboardShow implements AbstractShowService<Administr
 		res.setNumberSuggestions(numberSuggestions);
 		Integer numberFigments = this.repository.numberFigments();
 		res.setNumberFigments(numberFigments);
+		Integer numberAdvertisement = this.repository.numberAdvertisement();
+		res.setNumberAdvertisement(numberAdvertisement);
 		Double minDiscountAdvertisements = this.repository.minDiscountAdvertisements();
-		res.setMinDiscountAdvertisements(minDiscountAdvertisements);
+		if (minDiscountAdvertisements <= 3 && minDiscountAdvertisements >= 2) {
+			res.setMinDiscount("SMALL");
+		} else if (minDiscountAdvertisements >= 4 && minDiscountAdvertisements <= 5) {
+			res.setMinDiscount("AVERAGE");
+		} else if (minDiscountAdvertisements >= 6) {
+			res.setMinDiscount("LARGE");
+		}
 		Double maxDiscountAdvertisements = this.repository.maxDiscountAdvertisements();
+		if (maxDiscountAdvertisements <= 3 && maxDiscountAdvertisements >= 2) {
+			res.setMaxDiscount("SMALL");
+		} else if (maxDiscountAdvertisements >= 4 && maxDiscountAdvertisements <= 5) {
+			res.setMaxDiscount("AVERAGE");
+		} else if (maxDiscountAdvertisements >= 6) {
+			res.setMaxDiscount("LARGE");
+		}
 		res.setMaxDiscountAdvertisements(maxDiscountAdvertisements);
 		Double averageSmallDiscountAdvertisements = this.repository.averageSmallDiscountAdvertisements() / this.repository.numberAdvertisement();
 		res.setAverageSmallDiscountAdvertisements(averageSmallDiscountAdvertisements);
@@ -78,7 +91,7 @@ public class AdministratorDashboardShow implements AbstractShowService<Administr
 		}
 		Double stddevSAdv = AdministratorDashboardShow.stdev(maxAndMinSAdv, averageSmallDiscountAdvertisements);
 		res.setStddevSDiscountAdvertisements(stddevSAdv);
-		
+
 		Collection<Advertisement> stddevADiscountAdvertisements = this.repository.stddevDiscountAdvertisements();
 		List<Advertisement> advertisement2 = (List<Advertisement>) stddevADiscountAdvertisements;
 		List<Double> maxAndMinAAdv = new ArrayList<Double>();
@@ -88,7 +101,7 @@ public class AdministratorDashboardShow implements AbstractShowService<Administr
 		}
 		Double stddevAAdv = AdministratorDashboardShow.stdev(maxAndMinAAdv, averageAverageDiscountAdvertisements);
 		res.setStddevADiscountAdvertisements(stddevAAdv);
-		
+
 		Collection<Advertisement> stddevLDiscountAdvertisements = this.repository.stddevDiscountAdvertisements();
 		List<Advertisement> advertisement3 = (List<Advertisement>) stddevLDiscountAdvertisements;
 		List<Double> maxAndMinLAdv = new ArrayList<Double>();
@@ -98,7 +111,7 @@ public class AdministratorDashboardShow implements AbstractShowService<Administr
 		}
 		Double stddevLAdv = AdministratorDashboardShow.stdev(maxAndMinLAdv, averageLargeDiscountAdvertisements);
 		res.setStddevLDiscountAdvertisements(stddevLAdv);
-		
+
 		//D04
 		Double avgItemSupplier = this.repository.numberItems() / this.repository.numberSuppliers();
 		res.setAverageItemsPerSupplier(avgItemSupplier);
@@ -107,6 +120,14 @@ public class AdministratorDashboardShow implements AbstractShowService<Administr
 		Double avgRequestBuyer = this.repository.numberRequests() / this.repository.numberBuyers();
 		res.setAverageRequestsPerBuyer(avgRequestBuyer);
 		
+		//Examen
+		Double ratioOfItemsGrouped = this.repository.ratioOfItemsGrouped();
+		res.setRatioOfItemsGrouped(ratioOfItemsGrouped);
+		Double ratioOfRequestsHaveALink = this.repository.ratioOfRequestsHaveALink();
+		res.setRatioOfRequestsHaveALink(ratioOfRequestsHaveALink);
+		Double ratioOfRequestsHavePassword = this.repository.ratioOfRequestsHavePassword();
+		res.setRatioOfRequestsHavePassword(ratioOfRequestsHavePassword);
+
 		return res;
 	}
 

@@ -3,6 +3,7 @@ package acme.features.supplier.request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.letters.Letter;
 import acme.entities.requests.RequestEntity;
 import acme.entities.roles.Supplier;
 import acme.framework.components.Model;
@@ -47,8 +48,20 @@ public class SupplierRequestShowService implements AbstractShowService<Supplier,
 		String itemSupplier = entity.getItem().getSupplier().getUserAccount().getUsername();
 		model.setAttribute("itemSupplier", itemSupplier);
 
-		request.unbind(entity, model, "ticker", "creation", "quantity", "status", "notes", "rejectionJustification");
+		request.unbind(entity, model, "ticker", "creation", "quantity", "status", "notes", "totalPrice","rejectionJustification", "letter.description","letter.link", "letter.password","letter.status");
 	
+		Letter letter = this.repository.findLetterByReqId(entity.getId());
+		if (letter != null) {
+			model.setAttribute("hasLetter", true);
+			if(letter.getStatus().equals("ACCEPTED")) {
+				model.setAttribute("isAccepted", true);
+			}else {
+				model.setAttribute("isAccepted", false);
+			}
+
+		} else {
+			model.setAttribute("hasLetter", false);
+		}
 	}
 
 	@Override

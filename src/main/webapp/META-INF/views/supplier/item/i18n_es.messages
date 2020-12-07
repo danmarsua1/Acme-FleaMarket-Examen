@@ -6,6 +6,10 @@ supplier.item.form.label.description = Descripción
 supplier.item.form.label.itemCategory = Categoría
 supplier.item.form.label.price= Precio
 supplier.item.form.label.link= Link con Información Adicional
+supplier.item.form.label.status =Estado
+supplier.item.form.label.finalMode= Modo final
+supplier.item.form.label.finalMode.final= Final
+supplier.item.form.label.finalMode.draft= Borrador
 
 supplier.item.form.label.sectionTitle = Hoja de especificaciones
 supplier.item.form.label.newItem = Nuevo Producto
@@ -17,6 +21,8 @@ upplier.item.list.label.newItem= Nuevo Producto
 supplier.item.form.button.update = Actualizar
 supplier.item.form.button.create = Crear
 supplier.item.form.button.delete = Borrar
+
+supplier.item.form.button.createCoupon = Añadir cupón
 
 supplier.item.form.button.return=Atrás 
 

@@ -1,0 +1,11 @@
+
+buyer.letter.form.label.description = Descripcion
+buyer.letter.form.label.link = Enlace
+buyer.letter.form.label.password = Contraseña
+
+buyer.letter.form.button.return= Volver 
+buyer.letter.form.button.create= Crear
+
+buyer.letter.form.error.linkCanNotBeEmpty = Si se usa contraseña, debe proporcionar un link
+buyer.letter.error.password = La contraseña tiene que tener mínimo 10 carácteres que incluye una minúscula, una mayúscula, un dígito y un signo de puntuación.
+

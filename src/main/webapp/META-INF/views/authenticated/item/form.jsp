@@ -15,6 +15,18 @@
 	<acme:form-textbox code="authenticated.item.form.label.newItem" path="newItem"/>
 	
 	<jstl:if test="${command == 'show'}" >
+	
+		<jstl:if test="${hasCoupon==true}">
+		
+			<fieldset>
+				<legend><acme:message code="supplier.coupon.form.legend.coupon"/></legend>
+			</fieldset>
+		
+			<acme:form-textbox code="supplier.coupon.form.label.code" path="coupon.code" readonly="true" />
+			<acme:form-textarea code="supplier.coupon.form.label.description" path="coupon.description" readonly="true" />
+			<acme:form-money code="supplier.coupon.form.label.minMoney" path="coupon.minMoney" readonly="true" />
+			<acme:form-money code="supplier.coupon.form.label.maxMoney" path="coupon.maxMoney" readonly="true" />
+		</jstl:if>
 			
 			 <acme:form-submit method="get"
 			code="authenticated.item.form.button.viewMessages" 

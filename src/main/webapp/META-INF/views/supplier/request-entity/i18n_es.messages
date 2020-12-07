@@ -2,6 +2,7 @@ supplier.item.form.label.creationMoment = Momento de creación
 supplier.item.form.label.ticker = Ticket
 supplier.request.form.label.quantity = Cantidad
 supplier.request.form.label.notes =Notas
+supplier.request.form.label.totalPrice = Precio total
 
 supplier.item.form.label.referenceItem =Ticket del producto
 supplier.item.form.label.itemSupplier = Distribuidor
@@ -15,5 +16,13 @@ supplier.request.form.label.item.status.rejected = Rechazado
 supplier.item.list.label.creationMoment=Momento de creación
 supplier.item.list.label.title=Título
 
+supplier.letter.form.legend.letter= Letter
+supplier.letter.form.label.description = Descripción
+supplier.letter.form.label.link = Enlace
+supplier.letter.form.label.password = Contraseña
+supplier.letter.form.label.status = Estado
+
 supplier.request.form.button.update = Actualizar
 supplier.item.form.button.return=Atrás 
+
+supplier.request.form.error.rejectionJustification = Este campo es obligatorio 

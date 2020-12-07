@@ -1,3 +1,4 @@
+
 package acme.features.supplier.items;
 
 import java.util.ArrayList;
@@ -28,41 +29,41 @@ public class SupplierItemCreateService implements AbstractCreateService<Supplier
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private SupplierItemRepository repository;
-	
-	@Autowired
-	private SupplierSectionRepository sectionRepository;
+	private SupplierItemRepository		repository;
 
-		
+	@Autowired
+	private SupplierSectionRepository	sectionRepository;
+
+
 	@Override
-	public boolean authorise(Request<Item> request) {
+	public boolean authorise(final Request<Item> request) {
 		assert request != null;
 		return true;
 	}
 
 	@Override
-	public void bind(Request<Item> request, Item entity, Errors errors) {
+	public void bind(final Request<Item> request, final Item entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		
+
 		request.bind(entity, errors);
-		
+
 	}
 
 	@Override
-	public void unbind(Request<Item> request, Item entity, Model model) {
+	public void unbind(final Request<Item> request, final Item entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		
+
 		request.unbind(entity, model, "title", "ticker", "itemCategory", "description", "price", "photo", "link");
-		
+
 	}
 
 	@Override
-	public Item instantiate(Request<Item> request) {
-		
+	public Item instantiate(final Request<Item> request) {
+
 		Item result;
 		result = new Item();
 		Date moment;
@@ -71,23 +72,22 @@ public class SupplierItemCreateService implements AbstractCreateService<Supplier
 		SpecificationSheet ss = new SpecificationSheet();
 		Collection<Section> sections = new ArrayList<Section>();
 		Section section = new Section();
-		
+
 		supplier = this.repository.findSupplierById(request.getPrincipal().getActiveRoleId());
 		result.setSupplier(supplier);
-		
+
 		moment = new Date(System.currentTimeMillis() - 1);
 		result.setCreationMoment(moment);
 		result.setStatus("DRAFT");
 		result.setFinalMode(false);
-			
-		section.setIndexer(createIndexer());
+
+		section.setIndexer(this.createIndexer());
 		section.setDescription("Seccion Principal");
 		section.setTitle("Seccion Principal");
 		sections.add(section);
 		ss.setSections(sections);
 		result.setSpecificationSheet(ss);
-		System.out.println(section.getIndexer());
-		
+
 		//GENERAR TICKER
 		String ticker = "";
 
@@ -96,41 +96,41 @@ public class SupplierItemCreateService implements AbstractCreateService<Supplier
 		} while (!this.isTickerUnique(ticker, result));
 
 		result.setTicker(ticker);
-			
+
 		return result;
 	}
 
 	@Override
-	public void validate(Request<Item> request, Item entity, Errors errors) {
+	public void validate(final Request<Item> request, final Item entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		
-//	
-//		Collection<String> tickers = this.repository.findAllTickers();
-//		String tickerUpdate = this.repository.findOneTickerById(request.getModel().getInteger("id"));
-//		tickers.remove(tickerUpdate);
+
+		//
+		//		Collection<String> tickers = this.repository.findAllTickers();
+		//		String tickerUpdate = this.repository.findOneTickerById(request.getModel().getInteger("id"));
+		//		tickers.remove(tickerUpdate);
 
 		Customisation customisation = this.repository.findCustomisation();
 		String[] CustomisationParameter;
 		Integer n = 0;
-		
-//	
-//		// Tickers repetidos
-//		if (!errors.hasErrors("ticker")) {
-//			errors.state(request, !tickers.contains(entity.getTicker()), "ticker", "supplier.item.form.error.tickerRepetido");
-//		}
-//		
-		
+
+		//
+		//		// Tickers repetidos
+		//		if (!errors.hasErrors("ticker")) {
+		//			errors.state(request, !tickers.contains(entity.getTicker()), "ticker", "supplier.item.form.error.tickerRepetido");
+		//		}
+		//
+
 		//Section indexers in its specification sheet are unique
-//		Collection<Section> sections = this.repository.findAllSections();
-//		if(!errors.hasErrors("specificationSheet")) {
-//			for(Section s: entity.getSpecificationSheet().getSections()) {	
-//				errors.state(request,!sections.contains(s.getIndexer()),  "specificationSheet", "supplier.item.form.error.indexSectionNoUnico");
-//			}
-//			
-//		}
-		
+		//		Collection<Section> sections = this.repository.findAllSections();
+		//		if(!errors.hasErrors("specificationSheet")) {
+		//			for(Section s: entity.getSpecificationSheet().getSections()) {
+		//				errors.state(request,!sections.contains(s.getIndexer()),  "specificationSheet", "supplier.item.form.error.indexSectionNoUnico");
+		//			}
+		//
+		//		}
+
 		// Spam título
 		if (!errors.hasErrors("title")) {
 
@@ -175,30 +175,29 @@ public class SupplierItemCreateService implements AbstractCreateService<Supplier
 			}
 
 		}
-		System.out.println("validate");
-//		// Ticker incorrecto
-//		if (!errors.hasErrors("ticker")) {
-//			List<String> res = new ArrayList<>();
-//			Date moment = new Date(System.currentTimeMillis() - 1);
-//			Integer year = moment.getYear() + 1900;
-//
-//			res.add(entity.getTicker().substring(0, entity.getTicker().indexOf("-")));
-//			res.add(entity.getTicker().substring(entity.getTicker().indexOf("-") + 1, entity.getTicker().indexOf("-") + 3));
-//			res.add(entity.getTicker().substring(entity.getTicker().indexOf("-") + 4, entity.getTicker().length()));
-//
-//			boolean result = res.get(0).matches("[A-Z ]+") && (res.get(0).equals(entity.getSupplier().getItemCategory().substring(0, 1).toUpperCase()) || res.get(0).equals(entity.getSupplier().getItemCategory().substring(0, 2).toUpperCase())
-//							|| res.get(0).equals(entity.getSupplier().getItemCategory().substring(0, 3).toUpperCase())) && res.get(1).equals(year.toString().substring(2)) && res.get(2).matches("^[0-9]{6}$");
-//
-//			errors.state(request, result, "ticker", "supplier.item.form.error.tickerIncorrecto");
-//		}
-//
+		//		// Ticker incorrecto
+		//		if (!errors.hasErrors("ticker")) {
+		//			List<String> res = new ArrayList<>();
+		//			Date moment = new Date(System.currentTimeMillis() - 1);
+		//			Integer year = moment.getYear() + 1900;
+		//
+		//			res.add(entity.getTicker().substring(0, entity.getTicker().indexOf("-")));
+		//			res.add(entity.getTicker().substring(entity.getTicker().indexOf("-") + 1, entity.getTicker().indexOf("-") + 3));
+		//			res.add(entity.getTicker().substring(entity.getTicker().indexOf("-") + 4, entity.getTicker().length()));
+		//
+		//			boolean result = res.get(0).matches("[A-Z ]+") && (res.get(0).equals(entity.getSupplier().getItemCategory().substring(0, 1).toUpperCase()) || res.get(0).equals(entity.getSupplier().getItemCategory().substring(0, 2).toUpperCase())
+		//							|| res.get(0).equals(entity.getSupplier().getItemCategory().substring(0, 3).toUpperCase())) && res.get(1).equals(year.toString().substring(2)) && res.get(2).matches("^[0-9]{6}$");
+		//
+		//			errors.state(request, result, "ticker", "supplier.item.form.error.tickerIncorrecto");
+		//		}
+		//
 	}
 
 	@Override
-	public void create(Request<Item> request, Item entity) {
+	public void create(final Request<Item> request, final Item entity) {
 		assert request != null;
 		assert entity != null;
-		
+
 		//GENERAR TICKER
 		String ticker = "";
 
@@ -208,106 +207,104 @@ public class SupplierItemCreateService implements AbstractCreateService<Supplier
 
 		entity.setTicker(ticker);
 
-		System.out.println("create");
 		Date creationMoment;
 		creationMoment = new Date(System.currentTimeMillis() - 1);
 		entity.setCreationMoment(creationMoment);
-		
-		//Cuando se crea un item el estado esta en borrardor y no en modo final 
+
+		//Cuando se crea un item el estado esta en borrardor y no en modo final
 		entity.setStatus("DRAFT");
 		entity.setFinalMode(false);
 		entity.setNewItem(true);
-		
+
 		this.repository.save(entity);
-		
+
 	}
-	
+
 	//Other business methods
-		public String numbersSecuency() {
+	public String numbersSecuency() {
 
-			final char[] elementos = {
-				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-			};
+		final char[] elementos = {
+			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+		};
 
-			final char[] conjunto = new char[6];
+		final char[] conjunto = new char[6];
 
-			final String secuency;
+		final String secuency;
 
-			for (int i = 0; i < 6; i++) {
-				final int el = (int) (Math.random() * 10);
-				conjunto[i] = elementos[el];
-			}
-
-			secuency = new String(conjunto).toUpperCase();
-			return secuency;
-
+		for (int i = 0; i < 6; i++) {
+			final int el = (int) (Math.random() * 10);
+			conjunto[i] = elementos[el];
 		}
 
-		public String createTicker(final Item entity) {
+		secuency = new String(conjunto).toUpperCase();
+		return secuency;
 
-			//The ticker must be as follow: CCC-YY-NNNNNN
-			String ticker = new String();
+	}
 
-			//Get category item
-			String categoryItem = entity.getItemCategory();
-			String category ="";
-			
-			if(categoryItem!=null) {
-				category = categoryItem.substring(0, 3).toUpperCase();
-			}else {
-				category = "XXX";
-			}
-		
+	public String createTicker(final Item entity) {
 
-			//Get creation year
-			Date creationDate = entity.getCreationMoment();
+		//The ticker must be as follow: CCC-YY-NNNNNN
+		String ticker = new String();
 
-			final Calendar date = new GregorianCalendar();
-			date.setTime(creationDate);
+		//Get category item
+		String categoryItem = entity.getItemCategory();
+		String category = "";
 
-			String year = String.valueOf(date.get(Calendar.YEAR)).substring(2);
-
-			ticker = category + "-" + year + "-" + this.numbersSecuency();
-
-			return ticker;
-
+		if (categoryItem != null) {
+			category = categoryItem.substring(0, 3).toUpperCase();
+		} else {
+			category = "XXX";
 		}
 
-		public Boolean isTickerUnique(final String ticker, final Item entity) {
+		//Get creation year
+		Date creationDate = entity.getCreationMoment();
 
-			Boolean result = true;
+		final Calendar date = new GregorianCalendar();
+		date.setTime(creationDate);
 
-			Collection<Item> items = new ArrayList<>(this.repository.findMany());
+		String year = String.valueOf(date.get(Calendar.YEAR)).substring(2);
 
-			List<String> tickers = new ArrayList<>();
+		ticker = category + "-" + year + "-" + this.numbersSecuency();
 
-			for (final Item s : items) {
-				tickers.add(s.getTicker());
-			}
+		return ticker;
 
-			if (tickers.contains(ticker)) {
-				result = false;
-				this.createTicker(entity);
-			}
+	}
 
-			return result;
+	public Boolean isTickerUnique(final String ticker, final Item entity) {
 
+		Boolean result = true;
+
+		Collection<Item> items = new ArrayList<>(this.repository.findMany());
+
+		List<String> tickers = new ArrayList<>();
+
+		for (final Item s : items) {
+			tickers.add(s.getTicker());
 		}
-		
-		public Integer createIndexer() {
-	
-			Collection<Section> sections = new ArrayList<>(this.sectionRepository.findMany());
 
-			List<Integer> indexers = new ArrayList<>();
-
-			for (final Section s : sections) {
-				indexers.add(s.getIndexer());
-			}
-
-			Integer indexer = Collections.max(indexers)+1;
-		
-			return indexer;
-
+		if (tickers.contains(ticker)) {
+			result = false;
+			this.createTicker(entity);
 		}
+
+		return result;
+
+	}
+
+	public Integer createIndexer() {
+
+		Collection<Section> sections = new ArrayList<>(this.sectionRepository.findMany());
+
+		List<Integer> indexers = new ArrayList<>();
+
+		for (final Section s : sections) {
+			indexers.add(s.getIndexer());
+		}
+
+		Integer indexer = Collections.max(indexers) + 1;
+
+		return indexer;
+
+	}
 
 }

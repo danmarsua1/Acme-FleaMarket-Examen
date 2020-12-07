@@ -4,6 +4,8 @@ package acme.features.buyer.request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.coupons.Coupon;
+import acme.entities.letters.Letter;
 import acme.entities.requests.RequestEntity;
 import acme.entities.roles.Buyer;
 import acme.framework.components.Model;
@@ -43,7 +45,28 @@ public class BuyerRequestShowService implements AbstractShowService<Buyer, Reque
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "ticker", "creation", "quantity", "notes", "item.title");
+		request.unbind(entity, model, "ticker", "creation", "quantity", "notes", "totalPrice", "item.title", "letter.description", "letter.link", "letter.password", "letter.status");
+		
+		Letter letter = this.repository.findLetterByReqId(entity.getId());
+		if (letter != null) {
+			model.setAttribute("hasLetter", true);
+			if(letter.getStatus().equals("ACCEPTED")) {
+				model.setAttribute("isAccepted", true);
+			}else {
+				model.setAttribute("isAccepted", false);
+			}
+		} else {
+			model.setAttribute("hasLetter", false);
+		}
+		
+		Coupon coupon = this.repository.findCouponByItemId(entity.getId());
+		if (coupon != null) {
+			model.setAttribute("hasCoupon", true);
+
+		} else {
+			model.setAttribute("hasCoupon", false);
+		}
+
 	}
 
 	@Override

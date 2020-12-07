@@ -96,9 +96,8 @@ public class AuthenticatedSponsorDeleteService implements AbstractDeleteService<
 
 		if (banner != null) {
 			banner.setCreditCard(null);
+			this.bannerRepository.save(banner);
 		}
-
-		this.bannerRepository.save(banner);
 
 		this.creditCardRepository.delete(creditCard);
 

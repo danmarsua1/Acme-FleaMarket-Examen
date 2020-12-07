@@ -33,7 +33,7 @@ public class BuyerRequestListMineService implements AbstractListService<Buyer, R
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "creation", "quantity");
+		request.unbind(entity, model, "creation", "quantity", "totalPrice");
 	}
 
 	@Override

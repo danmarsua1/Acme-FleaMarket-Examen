@@ -18,3 +18,9 @@ authenticated.audit-record.form.button.list = List Audit Record
 authenticated.item.form.button.viewMessages = View forum
 authenticated.item.form.button.newMessage = New forum message
 authenticated.item.form.button.orderItem = Order it
+
+supplier.coupon.form.legend.coupon = Coupon linked
+supplier.coupon.form.label.code = Code
+supplier.coupon.form.label.description = Description
+supplier.coupon.form.label.minMoney = Min money
+supplier.coupon.form.label.maxMoney = Max money

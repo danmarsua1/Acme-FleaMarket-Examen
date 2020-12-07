@@ -1,4 +1,4 @@
-
+authenticated.auditor.form.label.accepted = Pending validation by administrator
 authenticated.auditor.form.label.firm = Firm
 authenticated.auditor.form.label.responsibilityStatement = Responsibility statements
 

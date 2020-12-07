@@ -179,6 +179,8 @@ public class AuthenticatedSponsorCreateService implements AbstractCreateService<
 			entity.setCreditCard(creditCard);
 			this.creditCardRepository.save(creditCard);
 
+		} else {
+			entity.setCreditCard(null);
 		}
 
 		this.repository.save(entity);
