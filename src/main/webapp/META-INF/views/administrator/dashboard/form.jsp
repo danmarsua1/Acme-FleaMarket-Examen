@@ -24,5 +24,9 @@
     <acme:form-textbox code="administrator.dashboard.form.label.averageRequestsPerSupplier" path="averageRequestsPerSupplier" />
     <acme:form-textbox code="administrator.dashboard.form.label.averageRequestsPerBuyer" path="averageRequestsPerBuyer" />
     
+    <acme:form-textbox code="administrator.dashboard.form.label.ratioOfItemsGrouped" path="ratioOfItemsGrouped" /> 
+    <acme:form-textbox code="administrator.dashboard.form.label.ratioOfRequestsHaveALink" path="ratioOfRequestsHaveALink" />
+    <acme:form-textbox code="administrator.dashboard.form.label.ratioOfRequestsHavePassword" path="ratioOfRequestsHavePassword" />
+    
     <acme:form-return code="administrator.dashboard.form.button.return" />
 </acme:form>

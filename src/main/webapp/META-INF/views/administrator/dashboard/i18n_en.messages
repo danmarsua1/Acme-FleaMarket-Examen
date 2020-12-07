@@ -16,3 +16,7 @@ administrator.dashboard.form.label.averageItemsPerSupplier = Average Number of I
 administrator.dashboard.form.label.averageRequestsPerSupplier = Average Number of Requests Per Supplier
 administrator.dashboard.form.label.averageRequestsPerBuyer = Average Number of Requests Per Buyer
 administrator.dashboard.form.button.return = Return
+
+administrator.dashboard.form.label.ratioOfItemsGrouped = Ratio of items that have a Coupon
+administrator.dashboard.form.label.ratioOfRequestsHaveALink = Ratio of requests that have a link
+administrator.dashboard.form.label.ratioOfRequestsHavePassword = Ratio of requests that have a password-protected link

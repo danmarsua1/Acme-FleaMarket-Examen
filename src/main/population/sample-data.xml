@@ -514,6 +514,20 @@
 		<property name="maxMoney" value="2.0€" />
 	</bean>
 	
+	<bean id="coupon2" class="acme.entities.coupons.Coupon">
+		<property name="code" value="201212"/>
+		<property name="description" value="Descuentos en tu pedido por compras sucesivas"/>
+		<property name="minMoney" value="100.0€" />
+		<property name="maxMoney" value="600.0€" />
+	</bean>
+	
+	<bean id="coupon3" class="acme.entities.coupons.Coupon">
+		<property name="code" value="201212"/>
+		<property name="description" value="Descuentos en tu pedido por compras sucesivas"/>
+		<property name="minMoney" value="0.20€" />
+		<property name="maxMoney" value="0.60€" />
+	</bean>
+	
 	<!-- Item -->
 	<bean id="item1" class="acme.entities.items.Item">
 		<property name="ticker" value="ALI-20-123456"/>
@@ -549,6 +563,7 @@
 		<property name="status" value="PUBLISHED"/>
 		<property name="specificationSheet" ref="specificationSheet2" />
 		<property name="supplier" ref="supplier2Supplier"/>
+		<property name="coupon" ref="coupon2"/>
 		<property name="requests">
 			<list>
 				<ref bean="request2" />
@@ -568,6 +583,7 @@
 		<property name="status" value="DRAFT"/>
 		<property name="specificationSheet" ref="specificationSheet3" />
 		<property name="supplier" ref="supplier1Supplier"/>
+		<property name="coupon" ref="coupon3"/>
 		<property name="requests">
 			<list>
 				<ref bean="request3" />
@@ -654,23 +670,26 @@
 	<bean id="request1" class="acme.entities.requests.RequestEntity">
 		<property name="ticker" value="ALI-20-000001"/>
 		<property name="creation" value="2020/11/04 12:00"/>
-		<property name="quantity" value="2.0"/>
+		<property name="quantity" value="4.0"/>
 		<property name="item" ref="item1" />
 		<property name="buyer" ref="buyer1Buyer" />
 		<property name="status" value="PENDING" />
   		<property name="rejectionJustification" value="" />
   		<property name="totalPrice" value="5.12€" />
+  		<property name="letter" ref="letter2" />
+  		
 	</bean>
 	
 	<bean id="request2" class="acme.entities.requests.RequestEntity">
 		<property name="ticker" value="ELE-20-000002"/>
 		<property name="creation" value="2020/11/04 12:50"/>
-		<property name="quantity" value="1.0"/>
+		<property name="quantity" value="2.0"/>
 		<property name="item" ref="item2" />
 		<property name="buyer" ref="buyer1Buyer" />
 		<property name="status" value="REJECTED" />
   		<property name="rejectionJustification" value="Example justification" />
   		<property name="totalPrice" value="650€" />
+  		<property name="letter" ref="letter1" />
 	</bean>
 	
 	<bean id="request3" class="acme.entities.requests.RequestEntity">
@@ -682,6 +701,29 @@
 		<property name="status" value="ACCEPTED" />
   		<property name="rejectionJustification" value="" />
   		<property name="totalPrice" value="1€" />
+  		<property name="letter" ref="letter3" />
+	</bean>
+	
+	<!-- Letter -->
+	<bean id="letter1" class="acme.entities.letters.Letter">
+		<property name="description" value="Solicito mi cupón porque he comprado 2 ordenadores"/>
+		<property name="link" value=""/>
+		<property name="password" value=""/>
+		<property name="status" value="PENDING"/>
+	</bean>
+	
+	<bean id="letter2" class="acme.entities.letters.Letter">
+		<property name="description" value="Solicito mi cupón porque he comprado 4 lechugas"/>
+		<property name="link" value="https://www.damemilechuga.com"/>
+		<property name="password" value="Dafkjw2!jfv"/>
+		<property name="status" value="PENDING"/>
+	</bean>
+	
+	<bean id="letter3" class="acme.entities.letters.Letter">
+		<property name="description" value="Solicito mi cupón"/>
+		<property name="link" value="https://www.asdnv.com"/>
+		<property name="password" value="Dafkjw2!jfv"/>
+		<property name="status" value="PENDING"/>
 	</bean>
 	
 	<!-- Messages -->

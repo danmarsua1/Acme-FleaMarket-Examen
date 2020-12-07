@@ -33,7 +33,6 @@ public class Coupon extends DomainEntity {
 	@NotNull
 	private Money				maxMoney;
 
-	@Column(unique = true)
 	@NotBlank
 	@Pattern(regexp = "^[0-9]{6}$", message = "yyddmm")
 	private String				code;

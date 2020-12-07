@@ -1,4 +1,3 @@
-
 package acme.entities.requests;
 
 import java.util.Date;
@@ -6,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -16,6 +16,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import acme.entities.items.Item;
+import acme.entities.letters.Letter;
 import acme.entities.roles.Buyer;
 import acme.framework.datatypes.Money;
 import acme.framework.entities.DomainEntity;
@@ -44,6 +45,8 @@ public class RequestEntity extends DomainEntity {
 	private Double				quantity;
 
 	private String				notes;
+	
+	
 
 	// Derived attributes -----------------------------------------------------
 
@@ -65,5 +68,8 @@ public class RequestEntity extends DomainEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Buyer				buyer;
+
+	@OneToOne(optional = true)
+	private Letter						letter;
 
 }

@@ -11,7 +11,6 @@
 		
 	<acme:form-submit code="supplier.item.form.button.create" action="/supplier/coupon/create?item=${item}"/>
 
-
 	<input id="item" name="item" value="${item}" type="hidden" />
 
 	<acme:form-return code="supplier.item.form.button.return"/>

@@ -36,7 +36,7 @@ public class AdministratorDashboardShow implements AbstractShowService<Administr
 
 		request.unbind(entity, model, "numberNews", "numberMaterialSheets", "numberToolSheets", "numberSuggestions", "numberFigments", "minDiscountAdvertisements", "numberAdvertisement", "minDiscount", "maxDiscount", "maxDiscountAdvertisements",
 			"averageSmallDiscountAdvertisements", "averageAverageDiscountAdvertisements", "averageLargeDiscountAdvertisements", "stddevSDiscountAdvertisements", "stddevADiscountAdvertisements", "stddevLDiscountAdvertisements", "averageItemsPerSupplier",
-			"averageRequestsPerSupplier", "averageRequestsPerBuyer");
+			"averageRequestsPerSupplier", "averageRequestsPerBuyer", "ratioOfItemsGrouped", "ratioOfRequestsHaveALink", "ratioOfRequestsHavePassword");
 	}
 
 	@Override
@@ -119,6 +119,14 @@ public class AdministratorDashboardShow implements AbstractShowService<Administr
 		res.setAverageRequestsPerSupplier(avgRequestSupplier);
 		Double avgRequestBuyer = this.repository.numberRequests() / this.repository.numberBuyers();
 		res.setAverageRequestsPerBuyer(avgRequestBuyer);
+		
+		//Examen
+		Double ratioOfItemsGrouped = this.repository.ratioOfItemsGrouped();
+		res.setRatioOfItemsGrouped(ratioOfItemsGrouped);
+		Double ratioOfRequestsHaveALink = this.repository.ratioOfRequestsHaveALink();
+		res.setRatioOfRequestsHaveALink(ratioOfRequestsHaveALink);
+		Double ratioOfRequestsHavePassword = this.repository.ratioOfRequestsHavePassword();
+		res.setRatioOfRequestsHavePassword(ratioOfRequestsHavePassword);
 
 		return res;
 	}

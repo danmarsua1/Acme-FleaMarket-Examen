@@ -1,0 +1,9 @@
+buyer.letter.form.label.description = Description
+buyer.letter.form.label.link = Link
+buyer.letter.form.label.password = Password
+
+buyer.letter.form.button.return= Return 
+buyer.letter.form.button.create= Create 
+
+buyer.letter.form.error.linkCanNotBeEmpty = If a password is used, you must provide a link
+buyer.letter.error.password = The password has a minimum length of 10 characters and that it includes at least one capital letters, one small letters, one digits, and one punctuation symbols. 

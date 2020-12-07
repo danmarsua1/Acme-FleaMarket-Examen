@@ -16,3 +16,7 @@ administrator.dashboard.form.label.averageItemsPerSupplier = Media del número d
 administrator.dashboard.form.label.averageRequestsPerSupplier = Media del número de Peticiones por Proveedor
 administrator.dashboard.form.label.averageRequestsPerBuyer = Media del número de Peticiones por Comprador
 administrator.dashboard.form.button.return = Volver
+
+administrator.dashboard.form.label.ratioOfItemsGrouped = Ratio de productos que tienen un Coupon
+administrator.dashboard.form.label.ratioOfRequestsHaveALink = Ratio de peticiones que tienen un link
+administrator.dashboard.form.label.ratioOfRequestsHavePassword = Ratio de peticiones que tienen contraseña

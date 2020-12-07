@@ -9,7 +9,6 @@ import java.util.GregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.entities.coupons.Coupon;
 import acme.entities.items.Item;
 import acme.entities.requests.RequestEntity;
 import acme.entities.requests.RequestEntityStatus;
@@ -36,7 +35,7 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 	@Override
 	public boolean authorise(final Request<RequestEntity> request) {
 		assert request != null;
-		System.out.println("AUTHORISE");
+	
 
 		return true;
 	}
@@ -46,7 +45,6 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		System.out.println("BIND");
 
 		request.bind(entity, errors, "item");
 
@@ -58,7 +56,6 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		System.out.println("UNBIND");
 
 		request.unbind(entity, model, "ticker", "quantity", "notes");
 
@@ -103,54 +100,29 @@ public class BuyerRequestCreateService implements AbstractCreateService<Buyer, R
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-		System.out.println("VALIDATE");
+
 	}
 
 	@Override
 	public void create(final Request<RequestEntity> request, final RequestEntity entity) {
 		assert request != null;
 		assert entity != null;
-		System.out.println("CREATE");
 
 		Date moment = new Date(System.currentTimeMillis() - 1);
 		entity.setCreation(moment);
-
-		System.out.println(entity.getItem().getTitle());
-		System.out.println(entity.getBuyer().getEmail());
 
 		Double quantity = entity.getQuantity();
 		Double price = entity.getItem().getPrice().getAmount();
 
 		Double total = quantity * price;
 
-		Coupon coupon = entity.getItem().getCoupon();
-
 		Money money = new Money();
-
-		if (coupon != null) {
-
-			Money minMoney = coupon.getMinMoney();
-			Money maxMoney = coupon.getMaxMoney();
-
-			//Condición para aplicar el descuento
-			if (quantity == 1) {
-				money.setCurrency("€");
-				money.setAmount(total);
-			} else if (quantity == 2 || quantity == 3) {
-				Double discount = minMoney.getAmount();
-				total = total - discount;
-				money.setCurrency("€");
-				money.setAmount(total);
-			} else if (quantity > 3) {
-				Double discount = maxMoney.getAmount();
-				total = total - discount;
-				money.setCurrency("€");
-				money.setAmount(total);
-			}
-
-		}
+		
+		money.setAmount(total);
+		money.setCurrency("€");
 
 		entity.setTotalPrice(money);
+		
 
 		this.repository.save(entity);
 	}

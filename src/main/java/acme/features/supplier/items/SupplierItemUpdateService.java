@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.coupons.Coupon;
 import acme.entities.customisations.Customisation;
 import acme.entities.items.Item;
 import acme.entities.requests.RequestEntity;
@@ -50,6 +51,15 @@ public class SupplierItemUpdateService implements AbstractUpdateService<Supplier
 			boolean hasRequests = true;
 			model.setAttribute("hasRequests", hasRequests);
 		}
+		
+		Coupon coupon = this.repository.findCouponByItemId(entity.getId());
+		if (coupon != null) {
+			model.setAttribute("hasCoupon", true);
+
+		} else {
+			model.setAttribute("hasCoupon", false);
+		}
+
 	}
 
 	@Override

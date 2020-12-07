@@ -49,5 +49,15 @@ public class Dashboard implements Serializable {
 	Double						averageRequestsPerSupplier;
 
 	Double						averageRequestsPerBuyer;
+	
+	//EXAMEN
+	
+	Double				ratioOfItemsGrouped;
+	
+	Double				ratioOfRequestsHaveALink;
+	
+	Double					ratioOfRequestsHavePassword;
+	
+	
 
 }

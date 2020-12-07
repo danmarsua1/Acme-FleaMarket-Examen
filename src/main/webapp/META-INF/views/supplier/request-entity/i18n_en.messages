@@ -2,6 +2,7 @@ supplier.request.form.label.creationMoment = Creation moment
 supplier.request.form.label.quantity = Quantity
 supplier.request.form.label.ticker = Ticker
 supplier.request.form.label.notes = Notes
+supplier.request.form.label.totalPrice = Total Price
 
 supplier.item.form.label.referenceItem = Item's ticker
 supplier.item.form.label.itemSupplier = Supplier
@@ -10,6 +11,12 @@ supplier.request.form.label.status = Status
 supplier.request.form.label.status.pending = Pending
 supplier.request.form.label.status.accepted = Accepted
 supplier.request.form.label.status.rejected = Rejected
+
+supplier.letter.form.legend.letter= Letter
+supplier.letter.form.label.description = Description
+supplier.letter.form.label.link = Link
+supplier.letter.form.label.password = Password
+supplier.letter.form.label.status = Status
 
 supplier.request.list.label.creation=Creation moment
 supplier.request.list.label.ticker=Ticker

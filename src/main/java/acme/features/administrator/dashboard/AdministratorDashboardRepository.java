@@ -59,4 +59,15 @@ public interface AdministratorDashboardRepository extends AbstractRepository {
 
 	@Query("select count(b) from Buyer b")
 	Double numberBuyers();
+	
+	//EXAMEN
+	
+	@Query("select 1.0 * count(c) / (select count(i) FROM Item i) from Coupon c")
+	Double ratioOfItemsGrouped();
+	
+	@Query("select 1.0 * count(l)/ (select count(r) FROM RequestEntity r)  from Letter l where l.link!=''")
+	Double ratioOfRequestsHaveALink();
+	
+	@Query("select 1.0 * count(l) / (select count(r) FROM RequestEntity r) from Letter l where l.password!=''")
+	Double ratioOfRequestsHavePassword();
 }

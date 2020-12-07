@@ -10,5 +10,13 @@ buyer.request.list.label.quantity = Quantity
 
 buyer.request.form.button.return= Back 
 buyer.request.form.button.create= Create 
+buyer.request.form.button.createLetter = Add Letter
+buyer.request.form.button.deleteLetter = Delete Letter
+
+buyer.letter.form.legend.letter = Letter
+buyer.letter.form.label.description = Description
+buyer.letter.form.label.link = Link
+buyer.letter.form.label.password = Password
+buyer.letter.form.label.status = Status
 
 buyer.request.ticker.pattern= The request ticker is not valid

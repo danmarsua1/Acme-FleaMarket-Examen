@@ -15,14 +15,18 @@ package acme.features.supplier.request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.coupons.Coupon;
+import acme.entities.letters.Letter;
 import acme.entities.requests.RequestEntity;
 import acme.entities.requests.RequestEntityStatus;
 import acme.entities.roles.Supplier;
+import acme.features.buyer.letter.BuyerLetterRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.HttpMethod;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.components.Response;
+import acme.framework.datatypes.Money;
 import acme.framework.entities.Principal;
 import acme.framework.helpers.PrincipalHelper;
 import acme.framework.services.AbstractUpdateService;
@@ -34,6 +38,9 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 
 	@Autowired
 	private SupplierRequestRepository repository;
+	
+	@Autowired
+	private  BuyerLetterRepository letterRepository;
 
 
 	@Override
@@ -75,7 +82,19 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 		String itemSupplier = entity.getItem().getSupplier().getUserAccount().getUsername();
 		model.setAttribute("itemSupplier", itemSupplier);
 
-		request.unbind(entity, model, "quantity", "notes", "status", "rejectionJustification");
+		request.unbind(entity, model, "quantity", "notes", "status", "rejectionJustification","letter.status", "totalPrice");
+		
+		Letter letter = this.repository.findLetterByReqId(entity.getId());
+		if (letter != null) {
+			model.setAttribute("hasLetter", true);
+			if(letter.getStatus().equals("ACCEPTED")) {
+				model.setAttribute("isAccepted", true);
+			}else {
+				model.setAttribute("isAccepted", false);
+			}
+		} else {
+			model.setAttribute("hasLetter", false);
+		}
 	}
 
 	@Override
@@ -88,6 +107,7 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 
 		id = request.getModel().getInteger("id");
 		result = this.repository.findOneById(id);
+		
 
 		return result;
 	}
@@ -115,16 +135,63 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 
 		RequestEntity result;
 		int id;
+		String status;
 
 		id = request.getModel().getInteger("id");
 		result = this.repository.findOneById(id);
+		
+		Double quantity = entity.getQuantity();
+		Double price = entity.getItem().getPrice().getAmount();
 
+		Double total = quantity * price;
+		
+		Coupon coupon = entity.getItem().getCoupon();
+
+		Money money = new Money();
+		money.setCurrency("€");
+		money.setAmount(total);
+		
+		System.out.println(coupon);
+		System.out.println(entity.getLetter().getStatus().equals("ACCEPTED"));
+
+		if (coupon != null && entity.getLetter().getStatus().equals("ACCEPTED")) {
+
+			Money minMoney = coupon.getMinMoney();
+			Money maxMoney = coupon.getMaxMoney();
+			
+			//Condición para aplicar el descuento
+			if (quantity == 1) {
+				money.setCurrency("€");
+				money.setAmount(total);
+			} else if (quantity == 2 || quantity == 3) {
+				Double discount = minMoney.getAmount();
+				total = total - discount;
+				money.setCurrency("€");
+				money.setAmount(total);
+			} else if (quantity > 3) {
+				Double discount = maxMoney.getAmount();
+				total = total - discount;
+				money.setCurrency("€");
+				money.setAmount(total);
+			}
+			
+		}
+
+		entity.setTotalPrice(money);
+
+		status = request.getModel().getString("letter.status");
+		Letter letter = entity.getLetter();
+		letter.setStatus(status);
+		
+		
 		result.setStatus(entity.getStatus());
 		if (result.getStatus() == RequestEntityStatus.REJECTED) {
 			result.setRejectionJustification(entity.getRejectionJustification());
 		}
-
+	
+		this.letterRepository.save(letter);
 		this.repository.save(entity);
+		
 	}
 
 	@Override

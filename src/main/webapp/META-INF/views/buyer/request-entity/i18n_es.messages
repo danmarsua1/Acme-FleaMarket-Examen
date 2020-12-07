@@ -10,5 +10,13 @@ buyer.request.list.label.quantity = Cantidad
 
 buyer.request.form.button.return= Atrás 
 buyer.request.form.button.create= Crear
+buyer.request.form.button.createLetter = Añadir letter
+buyer.request.form.button.deleteLetter = Borrar letter
+
+buyer.letter.form.legend.letter = Letter
+buyer.letter.form.label.description = Descripción
+buyer.letter.form.label.link = Enlace
+buyer.letter.form.label.password = Contraseña
+buyer.letter.form.label.status = Estado
 
 buyer.request.ticker.pattern= El código del pedido no es válido
