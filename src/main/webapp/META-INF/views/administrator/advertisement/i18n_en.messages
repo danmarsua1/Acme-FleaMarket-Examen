@@ -13,4 +13,4 @@ administrator.advertisement.form.button.create = Create
 administrator.advertisement.form.button.delete = Delete
 administrator.advertisement.form.button.return=Return 
 
-administrator.advertisement.error.displayPeriod = The display period has to be before current day
+administrator.advertisement.error.displayPeriod = The display period has to be after current day

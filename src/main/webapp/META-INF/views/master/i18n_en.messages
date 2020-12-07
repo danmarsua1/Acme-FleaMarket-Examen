@@ -39,8 +39,8 @@ master.menu.anonymous.list-martinez-bulletin = Martinez's bulletin
 master.menu.anonymous.create-martinez-bulletin = Publish in Martinez's bulletin
 master.menu.anonymous.list-advertisement = List of Advertisement
 master.menu.anonymous.list-new = List of News
-master.menu.anonymous.list-material-sheet = Material sheets
-master.menu.anonymous.list-tool-sheet = Tool sheets
+master.menu.anonymous.list-material-sheet = List of Material sheets
+master.menu.anonymous.list-tool-sheet = List of Tool sheets
 
 # master.menu.authenticated ###################################################
 
@@ -50,8 +50,8 @@ master.menu.authenticated.list-suggestion = List of Suggestion
 master.menu.authenticated.list-figment = List of Figments
 master.menu.authenticated.list-advertisement = List of Advertisement
 master.menu.authenticated.list-new = List of News
-master.menu.authenticated.list-material-sheet = Material sheets
-master.menu.authenticated.list-tool-sheet = Tool sheets
+master.menu.authenticated.list-material-sheet = List of Material sheets
+master.menu.authenticated.list-tool-sheet = List of Tool sheets
 master.menu.authenticated.list-items = List of Items
 
 # master.menu.administrator ###################################################
@@ -62,19 +62,19 @@ master.menu.administrator.user-accounts = User accounts
 master.menu.administrator.customisation = Customisation 
 master.menu.administrator.shutdown = Shut down
 
-master.menu.administrator.list-new = News
+master.menu.administrator.list-new = List of News
 master.menu.administrator.create-new = Create new
-master.menu.administrator.list-material-sheet = Material sheets
+master.menu.administrator.list-material-sheet = List of Material sheets
 master.menu.administrator.create-material-sheet = Create material sheet
-master.menu.administrator.list-tool-sheet = Tool sheets
+master.menu.administrator.list-tool-sheet = List of Tool sheets
 master.menu.administrator.create-tool-sheet = Create tool sheet
-master.menu.administrator.list-banner = Banners
+master.menu.administrator.list-banner = List of Banners
 master.menu.administrator.create-banner = Create banner
-master.menu.administrator.list-suggestion = Suggestion
+master.menu.administrator.list-suggestion = List of Suggestion
 master.menu.administrator.create-suggestion = Create Suggestion
-master.menu.administrator.list-figment = Figment
+master.menu.administrator.list-figment = List of Figment
 master.menu.administrator.create-figment = Create Figment
-master.menu.administrator.list-advertisement = Advertisement
+master.menu.administrator.list-advertisement = List of Advertisement
 master.menu.administrator.create-advertisement = Create Advertisement
 master.menu.administrator.dashboard = Dashboard
 master.menu.administrator.chart = Chart
@@ -94,7 +94,7 @@ master.menu.buyer.list-request = List of requests
 master.menu.sponsor ########################################################
 
 master.menu.sponsor = Sponsor
-master.menu.sponsor.list-banner = Banners
+master.menu.sponsor.list-banner = List of Banners
 master.menu.sponsor.create-banner = Create banner
 
 master.menu.auditor ########################################################

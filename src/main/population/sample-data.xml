@@ -112,7 +112,7 @@
 		<property name="picture" value="https://png.pngtree.com/picture-new1.jpg"/>
 		<property name="title" value="Ejemplo1"/>
 		<property name="moment" value="2020/10/25 10:21"/>
-		<property name="deadline" value="2021/01/15 23:00"/>
+		<property name="deadline" value="2020/12/20 23:00"/>
 		<property name="body" value="Esto es una novedad de ejemplo (1)"/>
 		<property name="confirmed" value="true" />
 	</bean>
@@ -122,7 +122,7 @@
 		<property name="picture" value="https://png.pngtree.com/picture-new2.jpg"/>
 		<property name="title" value="Ejemplo2"/>
 		<property name="moment" value="2020/10/25 10:25"/>
-		<property name="deadline" value="2021/01/01 23:00"/>
+		<property name="deadline" value="2021/02/20 23:00"/>
 		<property name="body" value="Esto es una novedad de ejemplo (2)"/>
 		<property name="relatedNews" value="http://www.related-new1.com" />
 		<property name="confirmed" value="true" />
