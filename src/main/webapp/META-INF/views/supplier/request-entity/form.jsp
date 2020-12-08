@@ -26,15 +26,15 @@
 		<acme:form-textarea code="supplier.letter.form.label.description" path="letter.description" readonly="true"/>
 		<acme:form-url code="supplier.letter.form.label.link" path="letter.link" readonly="true"/>
 		<acme:form-textbox code="supplier.letter.form.label.password" path="letter.password" readonly="true"/>
-		<jstl:if test="${isAccepted==false}">	
+		<jstl:if test="${isPending==true}">	
 		<acme:form-textbox code="supplier.letter.form.label.status" path="letter.status"/>
 		</jstl:if>
-		<jstl:if test="${isAccepted==true}">	
+		<jstl:if test="${isPending==false}">	
 		<acme:form-textbox code="supplier.letter.form.label.status" path="letter.status" readonly="true"/>
 		</jstl:if>
 	</jstl:if>
 	
-	<acme:form-submit test="${(command == 'show' && status == 'PENDING') || command == 'update'}"
+	<acme:form-submit test="${command == 'show' || command == 'update'}"
 		code="supplier.request.form.button.update" action="update" />
 	
 	<acme:form-return code="supplier.request.form.button.return"/>

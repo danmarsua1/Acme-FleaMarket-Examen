@@ -1,3 +1,4 @@
+
 package acme.entities.requests;
 
 import java.util.Date;
@@ -45,8 +46,6 @@ public class RequestEntity extends DomainEntity {
 	private Double				quantity;
 
 	private String				notes;
-	
-	
 
 	// Derived attributes -----------------------------------------------------
 
@@ -70,6 +69,7 @@ public class RequestEntity extends DomainEntity {
 	private Buyer				buyer;
 
 	@OneToOne(optional = true)
-	private Letter						letter;
+	@Valid
+	private Letter				letter;
 
 }

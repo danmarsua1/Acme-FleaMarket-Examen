@@ -91,7 +91,7 @@ master.menu.supplier ########################################################
 
 master.menu.supplier = Distribuidor
 master.menu.supplier.list-item = Lista de Productos
-master.menu.supplier.list-request = Lista de Peticiones
+master.menu.supplier.list-request = Lista de Peticiones con Coupon pendientes
 master.menu.supplier.list-mine-request = Lista de las Peticiones de mis productos
 master.menu.supplier.create-item = Crear Producto
 

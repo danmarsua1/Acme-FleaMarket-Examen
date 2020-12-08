@@ -1,3 +1,4 @@
+
 package acme.entities.letters;
 
 import javax.persistence.Entity;
@@ -28,9 +29,9 @@ public class Letter extends DomainEntity {
 
 	@Pattern(regexp = "^((?=[^ ]{10,})(?=(.*[a-z].*){1,})(?=(.*[A-Z].*){1,})(?=(.*[0-9].*){1,})((.*\\p{P}.*){1,}))?$", message = "{buyer.letter.error.password}")
 	private String				password;
-	
+
 	@NotNull
-	@Pattern(regexp = "^(PENDING|ACCEPTED|REJECTED)$")
-	private String	status;					// PENDIENTE, ACEPTADO O RECHAZADO
+	@Pattern(regexp = "^(PENDING|ACCEPTED|REJECTED)$", message = "{letter.error.status}")
+	private String				status;					// PENDIENTE, ACEPTADO O RECHAZADO
 
 }

@@ -83,7 +83,7 @@ master.menu.supplier ########################################################
 
 master.menu.supplier =Supplier
 master.menu.supplier.list-item = List of Item
-master.menu.supplier.list-request = List of Request
+master.menu.supplier.list-request = List of Request with Pending Coupon
 master.menu.supplier.list-mine-request = List of Request of my items
 master.menu.supplier.create-item =Create Item
 

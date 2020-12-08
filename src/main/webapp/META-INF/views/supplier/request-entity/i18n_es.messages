@@ -26,3 +26,4 @@ supplier.request.form.button.update = Actualizar
 supplier.item.form.button.return=Atrás 
 
 supplier.request.form.error.rejectionJustification = Este campo es obligatorio 
+letter.error.status = El estado debe ser 'PENDING', 'ACCEPTED' o 'REJECTED'

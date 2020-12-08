@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.customisations.Customisation;
+import acme.entities.forums.Forum;
+import acme.entities.forums.ForumRepository;
 import acme.entities.items.Item;
 import acme.entities.roles.Supplier;
 import acme.entities.sections.Section;
@@ -33,6 +35,9 @@ public class SupplierItemCreateService implements AbstractCreateService<Supplier
 
 	@Autowired
 	private SupplierSectionRepository	sectionRepository;
+
+	@Autowired
+	private ForumRepository				forumRepository;
 
 
 	@Override
@@ -217,6 +222,11 @@ public class SupplierItemCreateService implements AbstractCreateService<Supplier
 		entity.setNewItem(true);
 
 		this.repository.save(entity);
+
+		Forum forum = new Forum();
+		forum.setItem(entity);
+
+		this.forumRepository.save(forum);
 
 	}
 

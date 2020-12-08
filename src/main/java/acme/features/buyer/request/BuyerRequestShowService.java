@@ -46,19 +46,19 @@ public class BuyerRequestShowService implements AbstractShowService<Buyer, Reque
 		assert model != null;
 
 		request.unbind(entity, model, "ticker", "creation", "quantity", "notes", "totalPrice", "item.title", "letter.description", "letter.link", "letter.password", "letter.status");
-		
+
 		Letter letter = this.repository.findLetterByReqId(entity.getId());
 		if (letter != null) {
 			model.setAttribute("hasLetter", true);
-			if(letter.getStatus().equals("ACCEPTED")) {
-				model.setAttribute("isAccepted", true);
-			}else {
-				model.setAttribute("isAccepted", false);
+			if (letter.getStatus().equals("PENDING")) {
+				model.setAttribute("isPending", true);
+			} else {
+				model.setAttribute("isPending", false);
 			}
 		} else {
 			model.setAttribute("hasLetter", false);
 		}
-		
+
 		Coupon coupon = this.repository.findCouponByItemId(entity.getId());
 		if (coupon != null) {
 			model.setAttribute("hasCoupon", true);

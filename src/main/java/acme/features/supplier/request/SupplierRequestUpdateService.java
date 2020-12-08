@@ -37,10 +37,10 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private SupplierRequestRepository repository;
-	
+	private SupplierRequestRepository	repository;
+
 	@Autowired
-	private  BuyerLetterRepository letterRepository;
+	private BuyerLetterRepository		letterRepository;
 
 
 	@Override
@@ -82,15 +82,16 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 		String itemSupplier = entity.getItem().getSupplier().getUserAccount().getUsername();
 		model.setAttribute("itemSupplier", itemSupplier);
 
-		request.unbind(entity, model, "quantity", "notes", "status", "rejectionJustification","letter.status", "totalPrice");
-		
+		request.unbind(entity, model, "quantity", "notes", "status", "rejectionJustification", "letter.description", "letter.link", "letter.password", "letter.status", "totalPrice");
+
 		Letter letter = this.repository.findLetterByReqId(entity.getId());
+
 		if (letter != null) {
 			model.setAttribute("hasLetter", true);
-			if(letter.getStatus().equals("ACCEPTED")) {
-				model.setAttribute("isAccepted", true);
-			}else {
-				model.setAttribute("isAccepted", false);
+			if (letter.getStatus().equals("PENDING")) {
+				model.setAttribute("isPending", true);
+			} else {
+				model.setAttribute("isPending", false);
 			}
 		} else {
 			model.setAttribute("hasLetter", false);
@@ -107,7 +108,6 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 
 		id = request.getModel().getInteger("id");
 		result = this.repository.findOneById(id);
-		
 
 		return result;
 	}
@@ -117,6 +117,21 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+
+		Model model = request.getModel();
+
+		Letter letter = this.repository.findLetterByReqId(entity.getId());
+
+		if (letter != null) {
+			model.setAttribute("hasLetter", true);
+			if (letter.getStatus().equals("PENDING")) {
+				model.setAttribute("isPending", true);
+			} else {
+				model.setAttribute("isPending", false);
+			}
+		} else {
+			model.setAttribute("hasLetter", false);
+		}
 
 		boolean statusHasErrors = errors.hasErrors("status");
 		if (!statusHasErrors) {
@@ -139,59 +154,62 @@ public class SupplierRequestUpdateService implements AbstractUpdateService<Suppl
 
 		id = request.getModel().getInteger("id");
 		result = this.repository.findOneById(id);
-		
+
 		Double quantity = entity.getQuantity();
 		Double price = entity.getItem().getPrice().getAmount();
 
 		Double total = quantity * price;
-		
+
 		Coupon coupon = entity.getItem().getCoupon();
 
 		Money money = new Money();
 		money.setCurrency("€");
 		money.setAmount(total);
-		
-		System.out.println(coupon);
-		System.out.println(entity.getLetter().getStatus().equals("ACCEPTED"));
 
-		if (coupon != null && entity.getLetter().getStatus().equals("ACCEPTED")) {
+		if (coupon != null && entity.getLetter() != null) {
 
-			Money minMoney = coupon.getMinMoney();
-			Money maxMoney = coupon.getMaxMoney();
-			
-			//Condición para aplicar el descuento
-			if (quantity == 1) {
-				money.setCurrency("€");
-				money.setAmount(total);
-			} else if (quantity == 2 || quantity == 3) {
-				Double discount = minMoney.getAmount();
-				total = total - discount;
-				money.setCurrency("€");
-				money.setAmount(total);
-			} else if (quantity > 3) {
-				Double discount = maxMoney.getAmount();
-				total = total - discount;
-				money.setCurrency("€");
-				money.setAmount(total);
+			if (entity.getLetter().getStatus().equals("ACCEPTED")) {
+
+				Money minMoney = coupon.getMinMoney();
+				Money maxMoney = coupon.getMaxMoney();
+
+				//Condición para aplicar el descuento
+				if (quantity == 1) {
+					money.setCurrency("€");
+					money.setAmount(total);
+				} else if (quantity == 2 || quantity == 3) {
+					Double discount = minMoney.getAmount();
+					total = total - discount;
+					money.setCurrency("€");
+					money.setAmount(total);
+				} else if (quantity > 3) {
+					Double discount = maxMoney.getAmount();
+					total = total - discount;
+					money.setCurrency("€");
+					money.setAmount(total);
+				}
+
 			}
-			
+
 		}
 
 		entity.setTotalPrice(money);
 
-		status = request.getModel().getString("letter.status");
-		Letter letter = entity.getLetter();
-		letter.setStatus(status);
-		
-		
+		if (entity.getLetter() != null && request.getModel().hasAttribute("letter.status")) {
+			status = request.getModel().getString("letter.status");
+			Letter letter = entity.getLetter();
+			letter.setStatus(status);
+
+			this.letterRepository.save(letter);
+		}
+
 		result.setStatus(entity.getStatus());
 		if (result.getStatus() == RequestEntityStatus.REJECTED) {
 			result.setRejectionJustification(entity.getRejectionJustification());
 		}
-	
-		this.letterRepository.save(letter);
+
 		this.repository.save(entity);
-		
+
 	}
 
 	@Override

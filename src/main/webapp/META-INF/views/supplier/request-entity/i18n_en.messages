@@ -25,4 +25,5 @@ supplier.request.form.button.update = Update
 supplier.request.form.button.return=Return 
 
 supplier.request.form.error.rejectionJustification = This field is required
+letter.error.status = The status must be 'PENDING', 'ACCEPTED' or 'REJECTED'
 
