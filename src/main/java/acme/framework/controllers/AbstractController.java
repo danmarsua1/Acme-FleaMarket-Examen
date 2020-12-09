@@ -526,6 +526,14 @@ public abstract class AbstractController<R extends UserRole, E> {
 		result.setViewName("master/panic");
 		result.addObject("oops", oops);
 
+		//RANDOM BANNER
+		if (this.randomBannerRepository.findRandomBanner() != null) {
+			String banner = this.randomBannerRepository.findRandomBanner().getPicture();
+			result.addObject("randomBanner", banner);
+		} else {
+			result.addObject("randomBanner", "images/banner.png");
+		}
+
 		return result;
 	}
 
